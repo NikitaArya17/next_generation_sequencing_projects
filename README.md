@@ -1,10 +1,10 @@
-**The key scientific question that this project intends to address is the potential use of Trastuzumab and Bevacizumab in the treatment of additional types of cancers to the ones that they are normally used to treat. 
-This question will be addressed by conducting an analysis of scRNA-seq data obtained from cancer cell lines.**
+# The key scientific question that this project intends to address is the potential use of Trastuzumab and Bevacizumab in the treatment of additional types of cancers to the ones that they are normally used to treat. 
+## This question will be addressed by conducting an analysis of scRNA-seq data obtained from cancer cell lines.
 
 
 
 
-_**What are cancer cell lines?**_
+### What are cancer cell lines?
 
 These are cancer cells that keep dividing and growing under certain conditions over a period of time in a laboratory.
 
@@ -17,7 +17,7 @@ One limitation is that, as these cells are often grown on two-dimensional plasti
 
 
 
-_**What is scRNA-seq?**_
+### What is scRNA-seq?
 
 This stands for single-cell RNA sequencing. It is a sequencing technology that has made it possible to study the full range of mRNA molecules – known as the transcriptome - expressed at the level of individual cells. This analysis can be performed over millions of cells in a single study.
 
@@ -26,7 +26,7 @@ It is widely used in cancer research as it allows scientists to better understan
 
 
 
-_**What are Trastuzumab and Bevacizumab?**_
+### What are Trastuzumab and Bevacizumab?
 
 Trastuzumab targets HER2 and is used to treat HER2-positive breast and gastric cancers.
 Bevacizumab targets VEGF and is used for a variety of cancers, including colorectal, lung, glioblastoma, breast, liver and kidney cancer. 
@@ -36,14 +36,14 @@ Both of these drugs are classified as antibody therapies.
 
 
 
-_**What are antibody therapies?**_
+### What are antibody therapies?
 
 These drugs consist of antibodies that are made in a laboratory that help the body to fight cancer. They may kill the cancer cells directly, block the development of blood vessels in tumours, or help the immune system to kill cancer cells.
 
 
 
 
-_**How do these two antibody therapies differ in their mechanisms of action?**_
+### How do these two antibody therapies differ in their mechanisms of action?
 
 Trastuzumab acts by binding to the HER2 receptor, thus preventing HER2-mediated signalling. It is also believed to cause the death of cells that express HER2.
 Bevacizumab acts by binding to VEGF protein circulating in the blood, thus preventing it from binding to its cell-surface receptors. This results in a reduction in the growth of tumour blood vessels, thus limiting the blood supply to the tumour
