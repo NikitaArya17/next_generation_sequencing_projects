@@ -43,6 +43,14 @@ These drugs consist of antibodies that are made in a laboratory that help the bo
 
 
 
+How do these two antibody therapies differ in their mechanisms of action?
+
+Trastuzumab acts by binding to the HER2 receptor, thus preventing HER2-mediated signalling. It is also believed to cause the death of cells that express HER2.
+Bevacizumab acts by binding to VEGF protein circulating in the blood, thus preventing it from binding to its cell-surface receptors. This results in a reduction in the growth of tumour blood vessels, thus limiting the blood supply to the tumour
+
+
+
+
 References:
 
 https://www.cancer.gov/publications/dictionaries/cancer-terms/def/cancer-cell-line#:~:text=(KAN%2Dser%20sel%20line),certain%20conditions%20in%20a%20laboratory.
@@ -54,3 +62,7 @@ https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-017-0467-4
 https://www.cancer.gov/publications/dictionaries/cancer-terms/def/antibody-therapy
 
 https://www.sciencedirect.com/topics/medicine-and-dentistry/cancer-cell-line#:~:text=Limitations%20of%20cell%20lines%20include,growth%20of%20tumors%20in%20vivo.
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3228024
+
+https://www.ncbi.nlm.nih.gov/books/NBK532246/
