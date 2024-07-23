@@ -49,6 +49,12 @@ Trastuzumab acts by binding to the HER2 receptor, thus preventing HER2-mediated 
 Bevacizumab acts by binding to VEGF protein circulating in the blood, thus preventing it from binding to its cell-surface receptors. This results in a reduction in the growth of tumour blood vessels, thus limiting the blood supply to the tumour
 
 
+### The data used for this analysis was sourced from the following paper:
+[Kinker et al, 2020] https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8135089/
+
+
+
+
 
 
 *References*:
