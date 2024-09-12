@@ -29,7 +29,7 @@
 ### What are Trastuzumab and Bevacizumab?
 
 - Trastuzumab targets HER2 and is used to treat HER2-positive breast and gastric cancers.
-Bevacizumab targets VEGF and is used for a variety of cancers, including colorectal, lung, glioblastoma, breast, liver and kidney cancer. 
+Bevacizumab targets VEGFA and is used for a variety of cancers, including colorectal, lung, glioblastoma, breast, liver and kidney cancer. 
 
 - Both of these drugs are classified as antibody therapies.
 
@@ -46,7 +46,7 @@ These drugs consist of antibodies that are made in a laboratory that help the bo
 ### How do these two antibody therapies differ in their mechanisms of action?
 
 Trastuzumab acts by binding to the HER2 receptor, thus preventing HER2-mediated signalling. It is also believed to cause the death of cells that express HER2.
-Bevacizumab acts by binding to VEGF protein circulating in the blood, thus preventing it from binding to its cell-surface receptors. This results in a reduction in the growth of tumour blood vessels, thus limiting the blood supply to the tumour
+Bevacizumab acts by binding to VEGFA protein circulating in the blood, thus preventing it from binding to its cell-surface receptors. This results in a reduction in the growth of tumour blood vessels, thus limiting the blood supply to the tumour
 
 
 
