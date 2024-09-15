@@ -52,7 +52,7 @@ Bevacizumab acts by binding to VEGFA protein circulating in the blood, thus prev
 
 
 ### The data used for this analysis was sourced from the following paper:
-[Kinker et al, 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8135089/)
+[Kinker et al., 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8135089/)
 
 
 ### The data may be downloaded from the following portal:
