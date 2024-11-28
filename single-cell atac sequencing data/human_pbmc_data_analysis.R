@@ -3,8 +3,8 @@ if (!require("BiocManager", quietly = TRUE))
 BiocManager::install(version = "3.20")
 
 BiocManager::install(c("EnsDb.Hsapiens.v75", "biovizBase"))
+install.packages(c("Seurat", "Matrix", "irlba", "hdf5r", "remotes", "tidyverse"), type = "source")
 remotes::install_github("stuart-lab/signac", ref = "develop")
-install.packages(c("Seurat", "Matrix", "irlba", "hdf5r"), type = "source")
 
 library(Signac)
 library(Seurat)
@@ -15,13 +15,12 @@ library(hdf5r)
 library(Matrix)
 library(irlba)
 
-
 # The fragment file contains all unique fragments from each single cell.
-frag.file <- read.delim("/content/10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz", header = F, nrows = 10)
+frag.file <- read.delim("C:\Users\nikit\Downloads\10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz", header = F, nrows = 10)
 head(frag.file)
 
 # The rows of the counts matrix contain the regions on the chromosome that are unwound.
-counts <- Read10X_h5("/content/10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5")
+counts <- Read10X_h5("C:\Users\nikit\Downloads\10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5")
 counts[1:10, 1:10]
 
 # Both of the files mentioned previously are used to create a chromatin assay.
@@ -29,7 +28,7 @@ counts[1:10, 1:10]
 chrom_assay <- CreateChromatinAssay(
   counts = counts,
   sep = c(":", "-"),
-  fragments = "/content/10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz",
+  fragments = "C:\Users\nikit\Downloads\10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz",
   min.cells = 10,
   min.features = 200
 )
@@ -37,7 +36,7 @@ chrom_assay <- CreateChromatinAssay(
 str(chrom_assay)
 
 # The metadata contains essential information about the data
-metadata <- read.csv("/content/10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
+metadata <- read.csv("C:\Users\nikit\Downloads\10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
 View(metadata)
 
 # The metadata and the chromatin assay are used to create the Seurat object.
