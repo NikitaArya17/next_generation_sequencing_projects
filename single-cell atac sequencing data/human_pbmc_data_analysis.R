@@ -15,18 +15,20 @@ library(hdf5r)
 library(Matrix)
 library(irlba)
 
+# QUALITY CONTROL AND DATA PREPROCESSING
+
 # The fragment file contains all unique fragments from each single cell.
-frag.file <- read.delim("10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz", header = F, nrows = 10)
-head(frag.file)
+#frag.file <- read.delim("10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz", header = F, nrows = 10)
+#head(frag.file)
 
 # The rows of the counts matrix contain the regions on the chromosome that are unwound.
-counts <- Read10X_h5("10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5")
-counts[1:10, 1:10]
+#counts <- Read10X_h5("10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5")
+#counts[1:10, 1:10]
 
 # Both of the files mentioned previously are used to create a chromatin assay.
-# This allows the use of pecialised functions to analyse single-cell genomic data.
+# This allows the use of specialised functions to analyse single-cell genomic data.
 chrom_assay <- CreateChromatinAssay(
-  counts = counts,
+  counts = Read10X_h5("10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5"),
   sep = c(":", "-"),
   fragments = "10k_pbmc_ATACv2_nextgem_Chromium_Controller_fragments.tsv.gz",
   min.cells = 10,
@@ -127,7 +129,10 @@ pbmc <- FindClusters(object = pbmc, algorithm = 3)
 #Visualise the data
 DimPlot(object = pbmc, label = TRUE) + NoLegend()
 
+# DOWNSTREAM ANALYSIS
+
 # Create a gene activity matrix to integrate the scATAC data with scRNA-seq data.
 
 gene.activities <- GeneActivity(pbmc)
 gene.activities[1:10, 1:10]
+
