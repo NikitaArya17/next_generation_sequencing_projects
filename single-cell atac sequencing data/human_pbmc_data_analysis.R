@@ -6,10 +6,16 @@ BiocManager::install(c("EnsDb.Hsapiens.v75", "biovizBase"))
 install.packages(c("Seurat", "Matrix", "irlba", "hdf5r", "remotes", "tidyverse"), type = "source")
 remotes::install_github("stuart-lab/signac", ref = "develop")
 
+#To update outdated packages
+BiocManager::install(c(
+  "bit", "cpp11", "GenomeInfoDb", "Hmisc", "parallelly", "RSQLite", "Signac"
+), update = TRUE, ask = FALSE, force = TRUE)
+
 library(Signac)
 library(Seurat)
 library(EnsDb.Hsapiens.v75)
 library(biovizBase)
+library(GenomicRanges)
 library(tidyverse)
 library(hdf5r)
 library(Matrix)
@@ -27,6 +33,7 @@ library(irlba)
 
 # Both of the files mentioned previously are used to create a chromatin assay.
 # This allows the use of specialised functions to analyse single-cell genomic data.
+
 chrom_assay <- CreateChromatinAssay(
   counts = Read10X_h5("10k_pbmc_ATACv2_nextgem_Chromium_Controller_filtered_peak_bc_matrix.h5"),
   sep = c(":", "-"),
@@ -35,16 +42,18 @@ chrom_assay <- CreateChromatinAssay(
   min.features = 200
 )
 
+
 str(chrom_assay)
 
 # The metadata contains essential information about the data
-metadata <- read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
+#metadata <- read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
+
 View(metadata)
 
 # The metadata and the chromatin assay are used to create the Seurat object.
 pbmc <- CreateSeuratObject(
   counts = chrom_assay,
-  meta.data = metadata,
+  meta.data = read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1),
   assay = "ATAC"
 )
 
