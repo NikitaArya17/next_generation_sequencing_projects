@@ -46,7 +46,7 @@ chrom_assay <- CreateChromatinAssay(
 str(chrom_assay)
 
 # The metadata contains essential information about the data
-#metadata <- read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
+metadata <- read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1)
 
 View(metadata)
 
@@ -84,7 +84,7 @@ pbmc <- NucleosomeSignal(pbmc)
 #2. TSS Enrichment
 # DNA that is unwound is available to be transcribed.
 # Therefore, we are interested in locating peaks found on the transcription start sites of the DNA.
-pbmc <- TSSEnrichment(object = pbmc, fast = FALSE)
+pbmc <- TSSEnrichment(object = pbmc)
 
 #3. Blacklist Ratio
 # This metric helps us to locate and exclude certain regions of DNA that pose problems for high-throughput sequencing analyses.
@@ -106,18 +106,19 @@ a1 <- DensityScatter(pbmc, x = "nCount_ATAC", y = "TSS.enrichment", log_x = TRUE
 a2 <- DensityScatter(pbmc, x = 'nucleosome_signal', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
 
 a1 | a2
+png("plot.png")
 
 VlnPlot(object = pbmc,
-        features = c("nCount_ATAC", "nFeature_ATAC", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "fraction_reads_in_peaks"),
+        features = c("nCount_ATAC", "nFeature_ATAC", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "pct_reads_in_peaks"),
         pt.size = 0.1,
         ncol = 6)
 
 # Filtering out low quality cells according to our selected thresholds.
 pbmc <- subset(x = pbmc,
-               subset = nCount_ATAC > 3000 &
-                 fraction_reads_in_peaks > 15 &
-                 blacklist_ratio < 0.05 &
-                 nucleosome_signal < 4 &
+               subset = nCount_ATAC > 3000 |
+                 pct_reads_in_peaks > 15 |
+                 blacklist_ratio < 0.05 |
+                 nucleosome_signal < 4 |
                  TSS.enrichment > 3)
 
 
@@ -144,4 +145,3 @@ DimPlot(object = pbmc, label = TRUE) + NoLegend()
 
 gene.activities <- GeneActivity(pbmc)
 gene.activities[1:10, 1:10]
-
