@@ -106,7 +106,7 @@ a1 <- DensityScatter(pbmc, x = "nCount_ATAC", y = "TSS.enrichment", log_x = TRUE
 a2 <- DensityScatter(pbmc, x = 'nucleosome_signal', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
 
 a1 | a2
-png("plot.png")
+
 
 VlnPlot(object = pbmc,
         features = c("nCount_ATAC", "nFeature_ATAC", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "pct_reads_in_peaks"),
