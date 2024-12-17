@@ -107,6 +107,7 @@ a2 <- DensityScatter(pbmc, x = 'nucleosome_signal', y = 'TSS.enrichment', log_x 
 
 a1 | a2
 
+DensityScatter(pbmc, x = 'nCount_ATAC', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
 
 VlnPlot(object = pbmc,
         features = c("nCount_ATAC", "nFeature_ATAC", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "pct_reads_in_peaks"),
@@ -114,12 +115,15 @@ VlnPlot(object = pbmc,
         ncol = 6)
 
 # Filtering out low quality cells according to our selected thresholds.
-pbmc <- subset(x = pbmc,
-               subset = nCount_ATAC > 3000 |
-                 pct_reads_in_peaks > 15 |
-                 blacklist_ratio < 0.05 |
-                 nucleosome_signal < 4 |
-                 TSS.enrichment > 3)
+pbmc <- subset(
+  x = pbmc,
+  subset = nCount_ATAC > 9000 |
+    nCount_ATAC < 100000 |
+    pct_reads_in_peaks > 40 |
+    blacklist_ratio < 0.01 |    
+    nucleosome_signal < 4 |
+    TSS.enrichment > 4
+)
 
 
 #Normalisation for differences in cellular sequencing depth across cells and peaks
