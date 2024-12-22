@@ -54,14 +54,14 @@ View(metadata)
 pbmc <- CreateSeuratObject(
   counts = chrom_assay,
   meta.data = read.csv("10k_pbmc_ATACv2_nextgem_Chromium_Controller_singlecell.csv", header = T, row.names = 1),
-  assay = "ATAC"
+  assay = "peaks"
 )
 
 str(pbmc)
 
 
 #There are currently no added annotations, so this track will be empty.
-pbmc$ATAC$annotation
+#pbmc$ATAC$annotation
 
 # We can add gene annotations for the human genome.
 # This will allow downstream functions to obtain the gene annotation information directly from the Seurat object.
@@ -73,7 +73,7 @@ seqlevels(annotations) <- paste("chr", seqlevels(annotations))
 Annotation(pbmc) <- annotations
 
 #The annotations from the Ensembl Database have been added.
-pbmc$ATAC$annotation
+#pbmc$ATAC$annotation
 
 # 1. Nucleosome Signal
 # The primary goal of scATAC-seq is to detect regions of unwound DNA, where DNA binding proteins are free to bind.
@@ -89,7 +89,11 @@ pbmc <- TSSEnrichment(object = pbmc)
 #3. Blacklist Ratio
 # This metric helps us to locate and exclude certain regions of DNA that pose problems for high-throughput sequencing analyses.
 # These regions include unstructured or repetitive regions.
-pbmc$blacklist_ratio <- pbmc$blacklist_region_fragments / pbmc$peak_region_fragments
+pbmc$blacklist_ratio <- FractionCountsInRegion(
+  object = pbmc,
+  assay = "peaks",
+  regions = blacklist_hg38_unified
+)
 
 #4. Fraction of Reads in Peaks
 # Peaks with low fractions of reads are considered of low quality and should be filtered out.
@@ -101,24 +105,24 @@ View(pbmc@meta.data)
 
 # Visualising the Quality Control Metrics helps us decide our cut-off thresholds.
 colnames(pbmc@meta.data)
-a1 <- DensityScatter(pbmc, x = "nCount_ATAC", y = "TSS.enrichment", log_x = TRUE, quantiles = TRUE)
+a1 <- DensityScatter(pbmc, x = "nCount_peaks", y = "TSS.enrichment", log_x = TRUE, quantiles = TRUE)
 
 a2 <- DensityScatter(pbmc, x = 'nucleosome_signal', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
 
 a1 | a2
 
-DensityScatter(pbmc, x = 'nCount_ATAC', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
+DensityScatter(pbmc, x = 'nCount_peaks', y = 'TSS.enrichment', log_x = TRUE, quantiles = TRUE)
 
 VlnPlot(object = pbmc,
-        features = c("nCount_ATAC", "nFeature_ATAC", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "pct_reads_in_peaks"),
+        features = c("nCount_peaks", "nFeature_peaks", "TSS.enrichment", "nucleosome_signal", "blacklist_ratio", "pct_reads_in_peaks"),
         pt.size = 0.1,
         ncol = 6)
 
 # Filtering out low quality cells according to our selected thresholds.
 pbmc <- subset(
   x = pbmc,
-  subset = nCount_ATAC > 9000 |
-    nCount_ATAC < 100000 |
+  subset = nCount_peaks > 9000 |
+    nCount_peaks < 100000 |
     pct_reads_in_peaks > 40 |
     blacklist_ratio < 0.01 |    
     nucleosome_signal < 4 |
