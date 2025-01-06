@@ -5,36 +5,36 @@ This is an analysis conducted as part of the 'RNA Sequencing in Bioconductor' co
 
 Check that all of the samples are in the same order in the metadata and count data
 
-all(rownames(all_metadata) %in% colnames(all_rawcounts))
+`all(rownames(all_metadata) %in% colnames(all_rawcounts))`
 
 ## DESeq object to test for the effect of fibrosis regardless of genotype
 
-dds_all <- DESeqDataSetFromMatrix(countData = all_rawcounts, colData = all_metadata, design = ~ condition + genotype)
+`dds_all <- DESeqDataSetFromMatrix(countData = all_rawcounts, colData = all_metadata, design = ~ condition + genotype)`
 
 ## DESeq object to test for the effect of genotype on the effect of fibrosis
 
-dds_complex <- DESeqDataSetFromMatrix(countData = all_rawcounts, colData = all_metadata, design = ~ genotype + condition + genotype:condition)
+`dds_complex <- DESeqDataSetFromMatrix(countData = all_rawcounts, colData = all_metadata, design = ~ genotype + condition + genotype:condition)`
 
 ## Log transform counts for QC
 
-vsd_all <- vst(dds_all, blind = TRUE)
+`vsd_all <- vst(dds_all, blind = TRUE)`
 
 ## Create heatmap of sample correlation values
 
-vsd_all %>% assay() %>% cor() %>% pheatmap(annotation = select(all_metadata, c("genotype", "condition")))
+`vsd_all %>% assay() %>% cor() %>% pheatmap(annotation = select(all_metadata, c("genotype", "condition")))`
 
 ## Create the PCA plot for PC1 and PC2 and color by condition
 
-plotPCA(vsd_all, intgroup = "condition")
+`plotPCA(vsd_all, intgroup = "condition")`
 
 ## Create the PCA plot for PC1 and PC2 and color by genotype
 
-plotPCA(vsd_all, intgroup = "genotype")
+`plotPCA(vsd_all, intgroup = "genotype")`
 
 ## Select significant genes with padj < 0.05
 
-smoc2_sig <- subset(res_all, padj < 0.05) %>% data.frame() %>% rownames_to_column(var = "geneID")
+`smoc2_sig <- subset(res_all, padj < 0.05) %>% data.frame() %>% rownames_to_column(var = "geneID")`
 
 ## Extract the top 6 genes with padj values
 
-smoc2_sig %>% arrange(padj) %>% select(geneID, padj) %>% head()
+`smoc2_sig %>% arrange(padj) %>% select(geneID, padj) %>% head()`
