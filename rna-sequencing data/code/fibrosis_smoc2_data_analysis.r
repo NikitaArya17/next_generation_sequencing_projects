@@ -1,5 +1,5 @@
-install.packages("pheatmap")
-BiocManager::install("DESeq2")
+#install.packages("pheatmap")
+#BiocManager::install("DESeq2")
 
 library(DESeq2)
 library(tidyverse)
@@ -19,7 +19,8 @@ rownames(smoc2_metadata) <- c("smoc2_fibrosis1", "smoc2_fibrosis2", "smoc2_fibro
 smoc2_metadata
 
 # Organising the data for DESeq2
-# Use the match() function to reorder the columns of the raw counts so that it is in the same order as the rows of the metadata
+# Use the match() function to reorder the columns of the raw counts 
+#so it is in the same order as the rows of the metadata
 reorder_idx <- match(rownames(smoc2_metadata), colnames(smoc2_rawcounts))
 
 # Reorder the columns of the count data
@@ -31,7 +32,8 @@ dds_smoc2 <- DESeqDataSetFromMatrix(countData =  reordered_smoc2_rawcounts,
                               design = ~ condition)
 
 #Quality control on samples
-#To generate normalised counts to accurately compare gene expression between samples
+#To generate normalised counts 
+#to accurately compare gene expression between samples
 
 # Determine the size factors to use for normalization
 dds_smoc2 <- estimateSizeFactors(dds_smoc2)
@@ -39,7 +41,8 @@ dds_smoc2 <- estimateSizeFactors(dds_smoc2)
 # Extract the normalized counts
 smoc2_normalized_counts <- counts(dds_smoc2, normalized = TRUE)
 
-#Plotting a hierarchical heatmap allow us to visualise the variance between the samples
+#Plotting a hierarchical heatmap allows us to
+#visualise the variance between the samples
 
 # Log-transform the normalized counts
 vsd_smoc2 <- vst(dds_smoc2, blind = TRUE)
@@ -53,13 +56,16 @@ vsd_cor_smoc2 <- cor(vsd_mat_smoc2)
 # Plot the heatmap
 pheatmap(vsd_cor_smoc2, annotation = select(smoc2_metadata, condition))
      
-
 #PCA - Principal Component Analysis
-#Plots your samples and plots lines between them known as Principal Components. These basically tell you how much of the variation in your data can be explained by the fact that there are different samples
-#PCA is a method of dimension reduction. It reduces a multi-dimensional dataset to two dimensions.
+#Plots your samples and plots lines between them known as Principal Components.
+#These basically tell you how much of the variation in your data can be explained 
+#by the fact that there are different samples
+#PCA is a method of dimension reduction.
+#It reduces a multi-dimensional dataset to two dimensions.
 
 # Transform the normalized counts
 vsd_smoc2 <- vst(dds_smoc2, blind = TRUE)
+
 # Plot the PCA of PC1 and PC2
 plotPCA(vsd_smoc2, intgroup="condition")
 
@@ -72,7 +78,7 @@ dds_smoc2 <- DESeqDataSetFromMatrix(countData = reordered_smoc2_rawcounts,
                  design = ~ condition) #The design argument specifies the variables you want to control for
 
 # Run the DESeq2 analysis
- dds_smoc2_ <- DESeq(dds_smoc2)
+dds_smoc2_ <- DESeq(dds_smoc2)
 
  
 #In addition to running an analysis as above, we can plot the data using a negative binomial model
