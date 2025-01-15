@@ -1,4 +1,4 @@
-This is an analysis conducted as part of the 'RNA Sequencing in Bioconductor' course offered by Mary Piper on DataCamp. The notebook contains the basic workflow for the analysis of RNA-sequencing data, using data from a study of fibrosis in mouse kidney cells as an example.
+This is an analysis conducted as part of the 'RNA Sequencing in Bioconductor' course offered by Mary Piper on DataCamp. The R script contains the basic workflow for the analysis of RNA-sequencing data, using data from a study of fibrosis in mouse kidney cells as an example.
 
 
 # RNA-Seq Differential Expression Analysis Workflow Summary
