@@ -81,7 +81,8 @@ dds_smoc2 <- DESeqDataSetFromMatrix(countData = reordered_smoc2_rawcounts,
 dds_smoc2_ <- DESeq(dds_smoc2)
 
  
-#In addition to running an analysis as above, we can plot the data using a negative binomial model
+#In addition to running an analysis as above, 
+#we can plot the data using a negative binomial model
 #And we can assess the fit of the data to the model
 
 # Plot dispersions
@@ -93,8 +94,8 @@ plotDispEsts(dds_smoc2_)
 
 # Extract the results of the differential expression analysis
 smoc2_res <- results(dds_smoc2_,
-                contrast = c("condition", "fibrosis", "normal"),  #To extract the results for fibrosis relative to normal
-                alpha = 0.05)
+                contrast = c("condition", "fibrosis", "normal"),  
+                alpha = 0.05)#To extract the results for fibrosis relative to normal
 
 
 #We can improve the fold change estimates for the data by shrinking the log2 fold changes
@@ -125,7 +126,8 @@ smoc2_res <- lfcShrink(dds_smoc2_,
                     contrast = c("condition", "fibrosis", "normal"),
                     res = smoc2_res)
 
-#We can now explore our extracted results and locate the differentially expressed genes according to oue alpha
+#We can now explore our extracted results
+#and locate the differentially expressed genes according to oue alpha
 
 # Get an overview of the results
 summary(smoc2_res)
@@ -136,7 +138,8 @@ summary(smoc2_res)
 # Save results as a data frame
 smoc2_res_all <- data.frame(smoc2_res)
 
-# Subset the results to only return the significant genes with p-adjusted values less than 0.05
+# Subset the results to only return the significant genes
+#with p-adjusted values less than 0.05
 smoc2_res_sig <- subset(smoc2_res_all, padj < 0.05)
 
 #The results can be adequately explored through visualisations
@@ -173,3 +176,12 @@ pheatmap(sig_norm_counts_smoc2,
          show_rownames = F,
          annotation = select(smoc2_metadata, condition),
          scale = "row")
+
+smoc2_res_sig <- smoc2_res_sig %>% 
+                  data.frame() %>% 
+                  rownames_to_column(var = "geneID") %>% 
+                  arrange(padj) %>% 
+                  select(geneID, padj) %>% 
+                  head()
+
+print(smoc2_res_sig)
