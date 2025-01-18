@@ -148,7 +148,8 @@ smoc2_res_sig <- subset(smoc2_res_all, padj < 0.05)
 plotMA(smoc2_res)
 
 # Generate logical column
-smoc2_res_all <- data.frame(smoc2_res) %>% mutate(threshold = padj < 0.05)
+smoc2_res_all <- data.frame(smoc2_res) %>% 
+                  mutate(threshold = padj < 0.05)
 
 # Create the volcano plot
 ggplot(smoc2_res_all) +
@@ -185,3 +186,5 @@ smoc2_res_sig <- smoc2_res_sig %>%
                   head()
 
 print(smoc2_res_sig)
+
+write.csv(smoc2_res_sig, "top_6_most_significant_genes.csv")
