@@ -17,7 +17,7 @@ Check that all of the samples are in the same order in the metadata and count da
 
 `dds_complex <- DESeqDataSetFromMatrix(countData = all_rawcounts, colData = all_metadata, design = ~ genotype + condition + genotype:condition)`
 
-## Log transform counts for QC
+## Log transform counts for QC (Quality Control)
 
 `vsd_all <- vst(dds_all, blind = TRUE)`
 
