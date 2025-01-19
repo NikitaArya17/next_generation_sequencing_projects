@@ -1,4 +1,6 @@
-This is an analysis conducted as part of the 'RNA Sequencing in Bioconductor' course offered by Mary Piper on DataCamp. The R script contains the basic workflow for the analysis of RNA-sequencing data, using data from a study of fibrosis in mouse kidney cells as an example.
+The provided R script contains an analysis conducted as part of the 'RNA-Seq with Bioconductor in R' course offered by Mary Piper on [DataCamp](https://www.datacamp.com/courses/rna-seq-with-bioconductor-in-r). The R script contains the basic workflow for the analysis of RNA-sequencing data, using data from a study of fibrosis in mouse kidney cells as an example. The code for this basic workflow was built off of the code that was taught during this course.
+
+The script also contains code to convert Entrez Gene IDs to their corresponding gene symbols, at the end of the analysis. This code was built off of the documentation for the `biomaRt` library, available on [the Bioconductor webpage](https://bioconductor.org/packages/release/bioc/vignettes/biomaRt/inst/doc/accessing_ensembl.html).
 
 
 # RNA-Seq Differential Expression Analysis Workflow Summary
