@@ -1,6 +1,7 @@
 #install.packages("pheatmap")
-#BiocManager::install("DESeq2")
+#BiocManager::install(c("DESeq2", "biomaRt"))
 
+library(biomaRt)
 library(DESeq2)
 library(tidyverse)
 library(pheatmap)
@@ -178,6 +179,7 @@ pheatmap(sig_norm_counts_smoc2,
          annotation = select(smoc2_metadata, condition),
          scale = "row")
 
+#Extract the top 6 most significant genes
 smoc2_res_sig <- smoc2_res_sig %>% 
                   data.frame() %>% 
                   rownames_to_column(var = "geneID") %>% 
@@ -187,4 +189,22 @@ smoc2_res_sig <- smoc2_res_sig %>%
 
 print(smoc2_res_sig)
 
+#Convert gene IDs to gene symbols
+ensembl <- useMart("ensembl", dataset = "mmusculus_gene_ensembl")
+mart <- useDataset("mmusculus_gene_ensembl", useMart("ensembl"))
+genes <- smoc2_res_sig$geneID
+
+gene_symbols <- getBM(filters = "entrezgene_id",
+                        attributes = c("entrezgene_id", "external_gene_name", "mgi_symbol"),
+                        values = genes, 
+                        mart = ensembl)
+
+#Add gene symbols to dataframe of most significant genes
+smoc2_res_sig$geneID <- as.integer(smoc2_res_sig$geneID)
+smoc2_res_sig_gene_symbols <- smoc2_res_sig %>%
+                                    full_join(gene_symbols, by = c("geneID" = "entrezgene_id"))
+
+print(smoc2_res_sig_gene_symbols)
+
 write.csv(smoc2_res_sig, "top_6_most_significant_genes.csv")
+write.csv(smoc2_res_sig_gene_symbols, "gene_symbols_top_6_most_significant_genes.csv")
