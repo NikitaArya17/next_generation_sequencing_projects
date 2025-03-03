@@ -1,0 +1,21 @@
+"","Term","Ont","N","Up","Down","P.Up","P.Down"
+"GO:0007165","signal transduction","BP",259,0,1,1,0.637931034482759
+"GO:0007154","cell communication","BP",269,0,1,1,0.66256157635468
+"GO:0023052","signaling","BP",269,0,1,1,0.66256157635468
+"GO:0051716","cellular response to stimulus","BP",305,0,1,1,0.751231527093596
+"GO:0050896","response to stimulus","BP",326,0,1,1,0.802955665024631
+"GO:0050794","regulation of cellular process","BP",330,0,1,1,0.812807881773399
+"GO:0050789","regulation of biological process","BP",339,0,1,1,0.834975369458128
+"GO:0065007","biological regulation","BP",343,0,1,1,0.844827586206897
+"GO:0009987","cellular process","BP",386,0,1,1,0.950738916256158
+"GO:0008150","biological_process","BP",402,0,1,1,0.990147783251232
+"GO:0009265","2'-deoxyribonucleotide biosynthetic process","BP",1,0,0,1,1
+"GO:0009394","2'-deoxyribonucleotide metabolic process","BP",1,0,0,1,1
+"GO:0070935","3'-UTR-mediated mRNA stabilization","BP",1,0,0,1,1
+"GO:0018960","4-nitrophenol metabolic process","BP",1,0,0,1,1
+"GO:0042904","9-cis-retinoic acid biosynthetic process","BP",1,0,0,1,1
+"GO:0042905","9-cis-retinoic acid metabolic process","BP",1,0,0,1,1
+"GO:0006117","acetaldehyde metabolic process","BP",1,0,0,1,1
+"GO:0095500","acetylcholine receptor signaling pathway","BP",1,0,0,1,1
+"GO:0046717","acid secretion","BP",1,0,0,1,1
+"GO:0051693","actin filament capping","BP",1,0,0,1,1
