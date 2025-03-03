@@ -137,7 +137,8 @@ entrez_cll <- fit2_cll$genes[, "entrez"]
 enrich_kegg_cll <- kegga(fit2_cll, geneid = entrez_cll, species = "Hs")
 
 # View the top 20 enriched KEGG pathways
-topKEGG(enrich_kegg_cll)
+top_KEGG_pathways <- topKEGG(enrich_kegg_cll)
+write.csv(top_KEGG_pathways, "top_KEGG_pathways.csv")
 
 #We will now test for enrichment in gene sets 
 #that are known to influence the same biological process or molecular function. 
@@ -148,4 +149,5 @@ topKEGG(enrich_kegg_cll)
 enrich_go <- goana(fit2_cll[1:500, ], geneid = entrez_cll[1:500], species = "Hs")
 
 # View the top 20 enriched GO Biological Processes
-topGO(enrich_go, ontology = "BP")
+top_GO_BP <- topGO(enrich_go, ontology = "BP")
+write.csv(top_GO_BP, "top_GO_BP.csv")
