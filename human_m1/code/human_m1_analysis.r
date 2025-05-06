@@ -1,6 +1,6 @@
 # Install and load the necessary packages
-BiocManager::install("DESeq2")
-install.packages("pheatmap")
+#BiocManager::install("DESeq2")
+#install.packages("pheatmap")
 
 library(DESeq2)
 library(tidyverse)
