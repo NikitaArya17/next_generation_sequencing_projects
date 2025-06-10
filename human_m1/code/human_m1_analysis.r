@@ -7,9 +7,15 @@ library(tidyverse)
 library(pheatmap)
 
 # Read in the metadata file and the gene expression matrix
-meta_data <- read.csv("https://idk-etl-prod-download-bucket.s3.amazonaws.com/aibs_human_m1_10x/metadata.csv")
-exprs_mat <- read.csv("https://idk-etl-prod-download-bucket.s3.amazonaws.com/aibs_human_m1_10x/matrix.csv")
+meta_filepath <- "/Users/nikit/sequencing data analysis projects in R/metadata.csv"
 
-# Explore the data files
+meta_data <- read.csv(meta_filepath)
+gene_matrix <- read.csv("https://idk-etl-prod-download-bucket.s3.amazonaws.com/aibs_human_m1_10x/matrix.csv")
+
+# Exploring the metadata file
 head(meta_data)
-head(exprs_mat)
+str(meta_data)
+summary(meta_data)
+colnames(meta_data)
+
+meta_data <- meta_data %>% select(!ends_with("_color"))
