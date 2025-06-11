@@ -18,4 +18,4 @@ str(meta_data)
 summary(meta_data)
 colnames(meta_data)
 
-meta_data <- meta_data %>% select(!ends_with("_color"))
+meta_data <- meta_data %>% select(!ends_with("_color") & !ends_with("_order"))
