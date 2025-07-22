@@ -1,6 +1,7 @@
 #Load the required packages
 library(readr)
 library(tidyverse)
+library(ggplot2)
 
 #Read in the data
 leuk_est <- read_tsv("TCGA_all_leuk_estimate.masked.20170107.tsv", col_names = FALSE)
@@ -12,9 +13,12 @@ glimpse(immune_est)
 
 #Identify and remove duplicated rows
 sum(duplicated(immune_est))
-immune_est[duplicated(immune_est) == TRUE, ]
+immune_est[duplicated(immune_est), ]
 immune_est <- distinct(immune_est)
 sum(duplicated(immune_est))
+
+#There are multiple aliquots from the same sample.
+sum(duplicated(immune_est$SampleID))
 
 #Demonstrate that the second file contains relative immune cell abundance
 df_cell_types <- select(immune_est, contains(c("cells", "cytes", "phages", "phils")))
