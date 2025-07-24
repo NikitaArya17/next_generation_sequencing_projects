@@ -1,10 +1,11 @@
 #Load the required packages
 library(readr)
 library(tidyverse)
-library(ggplot2)
 
 #Read in the data
-leuk_est <- read_tsv("TCGA_all_leuk_estimate.masked.20170107.tsv", col_names = FALSE)
+leuk_est <- read_tsv("TCGA_all_leuk_estimate.masked.20170107.tsv",
+                     col_names = FALSE)
+
 immune_est <- read_tsv("TCGA.Kallisto.fullIDs.cibersort.relative.tsv")
 
 #Explore the data
@@ -17,11 +18,9 @@ immune_est[duplicated(immune_est), ]
 immune_est <- distinct(immune_est)
 sum(duplicated(immune_est))
 
-#There are multiple aliquots from the same sample.
-sum(duplicated(immune_est$SampleID))
-
 #Demonstrate that the second file contains relative immune cell abundance
-df_cell_types <- select(immune_est, contains(c("cells", "cytes", "phages", "phils")))
+df_cell_types <- immune_est %>%
+  select(contains(c("cells", "cytes", "phages", "phils")))
 glimpse(df_cell_types)
 
 df_cell_types$cell_type_fractions <- rowSums(df_cell_types)
@@ -43,3 +42,17 @@ head(immune_est$SampleID)
 colnames(leuk_est)
 head(leuk_est)
 
+leuk_est <- leuk_est %>%
+  relocate(SampleID, .before = CancerType)
+
+head(leuk_est)
+
+#We see that the SampleID column is
+#written slightly differently in each dataframe.
+head(leuk_est$SampleID)
+head(immune_est$SampleID)
+
+#Therefore, some string formatting is required.
+leuk_est$SampleID <- str_replace_all(leuk_est$SampleID, "-", ".")
+
+head(leuk_est$SampleID)
